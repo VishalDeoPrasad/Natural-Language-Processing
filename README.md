@@ -70,6 +70,41 @@ Solve the problem how do I convert words to vector in meaningfull manner.
 ### Document Term Metrix:
 ![Alt text](image.png)
 
+#### disadvantage: 
+Q1. squence of word can not be cature at all in Document Term Metrix. How can you solve it? <br>
+![Alt text](image-1.png)
+
+`A: n-gram, Instead of having uni-gram in the column can i have bi-grams/tri-grams/quard-grams in the column that will acturally capture phrase instade of words to an extend sequence of problem can be solved`
+
+Q2. Sparse Metrix
+`A: Let's say if i catpute 50 thousand tweet in my corpus, what will be Vocabalory size on an average.`
+`If i have 50k tweet in my corpus what could be vocabalary size.
+if there is 50k tweet then i may have more then 100k indiviual token.` <br>
+`limit of single tweet is 260 charactors which mean 20 to 25 words, if we put on Term Metrix, the staring 20 columns got 1,1,1,1,1,1... rest 999k will be 0,0,0,0,0...` <br>
+`like same way if 2nd tweet has 15 words it present once in all 15 words and rest(100k - 15) will be zeros.` <br>
+Q. How can we solve the problem of sparse metrix? <br>
+`A. Our Aim is to reduce he columns, how can we do this in term of documnet term metrix` <br>
+1. **Remove stopwords**: Stop words is very generic word which donot have a specfic meaning. for example, is, an, the, becasuse, couldn't etc. They are not helping us in defining words.
+2. Some of the unused things in documents:
+    * This step can be done using `regex`. anything appart from A-Z and a-z should be remove.
+    1. Stopwords
+    2. numbers
+    3. charactors
+    4. Hyperlink
+    5. Speical charactor
+    6. removing panchuation 
+    7. human spelling mistake: like aa, abb, abc etc. it don't make any sence how could you remove this. <br>
+3. **Stemming & lamatization**: it help us to get the root word of a verb. example run vs running, catch vs catching etc. <br>
+`convert every words into there root word.` <br>
+    1. Lamatization: Lamatization has english structure in term of verb, adverbe, adjective etc store in tree based data structure, lamatization has that infomation.
+    * Lamatization is very logical, it understand the entire english language.
+    2. stemming does not has that information, stemming is stupid, It does not have the understanding of infomation. <br>
+    * it has so stupid it has given some rule like 5th class student, like if you see `caring` remove `ing`, if you see `cares` remove `es`, if you see `esses` remove `es` etc. 
+    * Algorithm which are used in stemming is `porter stemming`, it is just a set of rules and don't have much knowledge of english language.
+    * it is mainly used in creating `Documnet Term Metrix`. 
+    * In stemming some of the pattern are correct and some of the pattern are wrong. 
+
+![Alt text](image-2.png)
 
 ### What are my use-cases in NLP? what kind of problem we can solve using NLP?
 1. Document classifiction: can i take a sentence or news article, or a tweet and classifie it into certain classes. or simple classifiction problem. <br>
