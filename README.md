@@ -65,7 +65,7 @@ Q. What are the problem of NLP?
 
 ### Embedding: 
 Solve the problem how do I convert words to vector in meaningfull manner.
-1. Frequency based
+1. Frequency based `Document Term Metrix`
 2. Prediction based
 
 ### Document Term Metrix:
@@ -82,9 +82,11 @@ Q2. Sparse Metrix
 `If i have 50k tweet in my corpus what could be vocabalary size.
 if there is 50k tweet then i may have more then 100k indiviual token.` <br>
 `limit of single tweet is 260 charactors which mean 20 to 25 words, if we put on Term Metrix, the staring 20 columns got 1,1,1,1,1,1... rest 999k will be 0,0,0,0,0...` <br>
-`like same way if 2nd tweet has 15 words it present once in all 15 words and rest(100k - 15) will be zeros.` <br>
+`like same way if 2nd tweet has 15 words it present once in all 15 words and rest(100k - 15) will be zeros.` <br> <br>
 Q. How can we solve the problem of sparse metrix? <br>
 `A. Our Aim is to reduce he columns, how can we do this in term of documnet term metrix` <br>
+
+    How do we create some preprocessing function on text?
 1. **Remove stopwords**: Stop words is very generic word which donot have a specfic meaning. for example, is, an, the, becasuse, couldn't etc. They are not helping us in defining words.
 2. Some of the unused things in documents:
     * This step can be done using `regex`. anything appart from A-Z and a-z should be remove.
@@ -99,6 +101,7 @@ Q. How can we solve the problem of sparse metrix? <br>
 `convert every words into there root word.` <br>
     1. Lamatization: Lamatization has english structure in term of verb, adverbe, adjective etc store in tree based data structure, lamatization has that infomation.
     * Lamatization is very logical, it understand the entire english language.
+    * In lematization, if the word is verb then only you can change the word, if it is noun you can not change the word. for example, shopping, increased etc
     2. stemming does not has that information, stemming is stupid, It does not have the understanding of infomation. <br>
     * it has so stupid it has given some rule like 5th class student, like if you see `caring` remove `ing`, if you see `cares` remove `es`, if you see `esses` remove `es` etc. 
     * Algorithm which are used in stemming is `porter stemming`, it is just a set of rules and don't have much knowledge of english language.
@@ -108,12 +111,12 @@ Q. How can we solve the problem of sparse metrix? <br>
 ![Alt text](image-2.png)
 
 ### What are my use-cases in NLP? what kind of problem we can solve using NLP?
-1. Document classifiction: can i take a sentence or news article, or a tweet and classifie it into certain classes. or simple classifiction problem. <br>
+1. `Document classifiction`: can i take a sentence or news article, or a tweet and classifie it into certain classes. or simple classifiction problem. <br>
 use-case 1: **ticket routing system**; suppose you help some techinical problem you enter the description of the problem based on the description you ticket get routed to HR, IT system, manager etc. <br>
 
-2. Sentiment analysis: can i take some article or tweet and find out the sentiment analysis.
+2. `Sentiment analysis`: can i take some article or tweet and find out the sentiment analysis.
 
-3. Language Model (like chatbot): like chatgpt, where we can solve multiple problem for example: <br>
+3. `Language Model` (like chatbot): like chatgpt, where we can solve multiple problem for example: <br>
 **1. Summerization Probem:** given a long sentance can you do summerization. <br>
 **2. Translation Probem:** Given a sentance can you convert it to some other language <br>
 **3. Question Answering:** Given a question can you answer. <br>
@@ -133,18 +136,30 @@ use-case 1: **ticket routing system**; suppose you help some techinical problem 
     ```
     example 2: from the transcript of the meeting can i extract the **plan of action**, the **POCs** and next meeting follow up **date**. 
     ``` 
-**6. Image to Caption**: Image to **text**, Given an image and generate a **caption** to that image. <br>
-**7. Text to Image**: Given an **text**, can I generate the **image**. <br>
-**8. Image to Text**: OCR(combination of CV & NLP), given a **text image** can i get the **text**. <br>
+4. `Image to Caption`: Image to **text**, Given an image and generate a **caption** to that image. <br>
+5. `Text to Image`: Given an **text**, can I generate the **image**. <br>
+6. `Image to Text`: OCR(combination of CV & NLP), given a **text image** can i get the **text**. <br>
 
 *These are the things we are consider in natural language processing. early `1` chatbot solves `1` probem now take an example of `chatgpt` it do almost everything.*
 
 
 
 
-### How do we create some preprocessing function on text?
-
-
 
 ### How do I crate a machine learning model in text data
 -----------------------------------------------------------------
+
+
+Innomatics Research Lab
+### Given a word, predict the next word
+
+### loss
+```python
+model.compile(loss='sparse_categorical_crossentory', optimizer='adam', metrices=['accuracy'])
+model.fit(x,y, epochs=10, batch_size=32)
+```
+1. Categorical crossentropy
+    - Y, should be encoded format to perform categorica crossentroy
+1. Sparse Categorical crossentropy
+    - accept you y in the form of interger
+    - use in term of LSTM
